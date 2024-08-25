@@ -52,7 +52,7 @@ const port = process.env.PORT || 4000;
 app.get("/", function (req, res) {
   res.send("<h1>WeWatcheD Server</h1>");
 });
-io.on("connection", function (socket) {
+io.on("connection", (socket) => {
   socket.emit("whoami", { id: socket.id });
   // join to the room
   socket.on("joinmetothisroom", ({ roomid, name }) => {
