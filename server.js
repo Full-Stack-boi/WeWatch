@@ -49,7 +49,7 @@ var io = require("socket.io")(http);
 
 const port = process.env.PORT || 4000;
 
-app.get("/", function (req, res) {
+app.get("/", (req, res) => {
   res.send("<h1>WeWatcheD Server</h1>");
 });
 io.on("connection", (socket) => {
