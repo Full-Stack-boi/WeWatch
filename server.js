@@ -11,37 +11,35 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  // Connected Check
-  console.log("user connected");
   socket.emit("whoami", { id: socket.id });
-  // Join to the room
+  // join to the room
   socket.on("joinmetothisroom", ({ roomid, name }) => {
     socket.join(roomid);
     socket.emit("joinmetothisroomsuccess", `${roomid} `);
     io.to(roomid).emit("someonejoined", name);
   });
 
-  // Tell everyone who are here in the room
+  // tell everyone who are here in the room
   socket.on("tell_everyone_who_joined", ({ allusers, roomid }) => {
     io.to(roomid).emit("who_joined", allusers);
   });
 
-  // Check connection
+  // check connection
   socket.on("msg", ({ data, roomid }) => {
     io.to(roomid).emit("msg", data);
   });
 
-  // Get video state
+  // get video state
   socket.on("videoStates", ({ videoState, roomid }) => {
     io.to(roomid).emit("videoStates", videoState);
   });
 
-  // Disconnect Check
+  // disconnect
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
 });
 
-// server.listen(port, () => {
-// 	console.log(`listening on ${port}`);
-// });
+server.listen(port, () => {
+  console.log(`listening on ${port}`);
+});
