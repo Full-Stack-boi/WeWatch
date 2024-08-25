@@ -5,7 +5,7 @@ let roomid;
 let iamhost = false;
 let allusersinroom = [];
 
-const io = require("socket.io-client/lib/socket.io");
+const io = require("socket.io");
 /* Server URL */
 const socket = io("https://wewatch-5wj7.onrender.com");
 
