@@ -43,21 +43,28 @@
 // server.listen(port, () => {
 //   console.log(`listening on ${port}`);
 // });
-var app = require("express")();
-var http = require("http").Server(app);
-var io = require("socket.io")(http);
+const express = require("express");
+const http = require("http");
+const socketIO = require("socket.io");
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIO(server, { cors: { origin: "*" } });
 
 const port = process.env.PORT || 4000;
 
 app.get("/", (req, res) => {
   res.send("<h1>WeWatcheD Server</h1>");
 });
+
 io.on("connection", (socket) => {
+  console.log("a user connected");
   socket.emit("whoami", { id: socket.id });
+
   // join to the room
   socket.on("joinmetothisroom", ({ roomid, name }) => {
     socket.join(roomid);
-    socket.emit("joinmetothisroomsuccess", `${roomid} `);
+    socket.emit("joinmetothisroomsuccess", `${roomid}`);
     io.to(roomid).emit("someonejoined", name);
   });
 
@@ -82,6 +89,6 @@ io.on("connection", (socket) => {
   });
 });
 
-http.listen(port, function () {
+server.listen(port, () => {
   console.log(`listening on ${port}`);
 });
