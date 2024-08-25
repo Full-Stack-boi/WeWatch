@@ -6,7 +6,7 @@ let iamhost = false;
 let allusersinroom = [];
 
 /* Server URL */
-const socket = io("we-watch-gold.vercel.app");
+const socket = io("https://wewatched.onrender.com");
 
 socket.on("whoami", ({ id }) => {
   // console.log('myid', id);
