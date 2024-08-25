@@ -6,7 +6,7 @@ let iamhost = false;
 let allusersinroom = [];
 
 /* Server URL */
-const socket = io("https://wewatch-5wj7.onrender.com");
+const socket = "https://wewatch-5wj7.onrender.com";
 
 socket.on("whoami", ({ id }) => {
   // console.log('myid', id);
