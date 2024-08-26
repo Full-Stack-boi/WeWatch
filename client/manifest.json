@@ -1,17 +1,30 @@
 {
-	"manifest_version": 2,
-	"name": "WeWatched",
-	"description": "A chrome extension for watching with your friends and family.",
-	"version": "1.0.0",
-	"content_scripts": [
-		{
-			"matches": ["https://www.youtube.com/watch?*",
-						"https://www.netflix.com/*",
-						"https://www.hotstar.com/*",
-						"https://www.primevideo.com/*"],
-			"js": ["socketioclient.js", "content.js"],
-			"css": ["style.css"]
-		}
-	],
-	"web_accessible_resources": ["style.css"]
+  "manifest_version": 3,
+  "name": "WeWatched",
+  "description": "A Chrome extension for watching with your friends and family.",
+  "version": "1.0.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/watch?*",
+        "https://www.netflix.com/*",
+        "https://www.hotstar.com/*",
+        "https://www.primevideo.com/*"
+      ],
+      "js": ["socketioclient.js", "content.js"],
+      "css": ["style.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["style.css"],
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://www.netflix.com/*",
+        "https://www.hotstar.com/*",
+        "https://www.primevideo.com/*"
+      ]
+    }
+  ],
+  "permissions": ["scripting", "storage"]
 }
